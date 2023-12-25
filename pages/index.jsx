@@ -1,6 +1,9 @@
 import { useEffect, useState } from 'react'
 import Image from 'next/image'
 import { Player } from 'video-react';
+import Upload from './upload'
+
+
 
 function cn(...classes) {
   return classes.filter(Boolean).join(' ')
@@ -16,7 +19,6 @@ export default function Gallery({ images }) {
       const response = await fetch('/api/getImages');
       if (response.ok) {
         const data = await response.json();
-        console.log(data);
         setProject(data);
       } else {
         throw new Error('Failed to fetch images');
@@ -30,7 +32,8 @@ export default function Gallery({ images }) {
   // console.log(project);
 }, []);
 return (
-  <div className="mx-auto max-w-2xl py-16 px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8">
+  <div className="mx-auto flex flex-col gap-10 max-w-2xl py-16 px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8">
+    <Upload />
     <div className="grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
       {project && project.map((image, i) => (
         image.metadata.mimetype === "image/jpeg" ?
@@ -42,7 +45,7 @@ return (
 //   height="1080"
 //   src={`https://eencnukfilboslmuzsbm.supabase.co/storage/v1/object/public/images/${image.name}`}
 // />
-<Player>
+<Player key={i} >
 <source src={`https://eencnukfilboslmuzsbm.supabase.co/storage/v1/object/public/images/${image.name}`} />
 </Player>
         // <h2>nada</h2>
@@ -61,7 +64,7 @@ function BlurImage({ image }) {
         
         <Image
           alt=""
-          src={`https://eencnukfilboslmuzsbm.supabase.co/storage/v1/object/public/images/${image.name}`}
+          src={`https://eencnukfilboslmuzsbm.supabase.co/storage/v1/object/public/basabis/${image.name}`}
           layout="fill"
           objectFit="cover"
           className={cn(
@@ -73,7 +76,9 @@ function BlurImage({ image }) {
           onLoadingComplete={() => setLoading(false)}
         />
       </div>
-        <p>{image.created_at}</p>
+      <div className=' w-2/3 p-2  bg-gray-300 my-2 rounded-xl'>
+        <p className='text-white text-sm'>{image.created_at}</p>
+      </div>
     </a>
   )
 }
