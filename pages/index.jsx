@@ -57,7 +57,10 @@ return (
 
 function BlurImage({ image }) {
   const [isLoading, setLoading] = useState(true)
-
+  const formatCreationDate = (dateString) => {
+    const date = new Date(dateString);
+    return date.toLocaleDateString(); // Adjust this format based on your requirements
+  };
   return (
     <a href={`https://eencnukfilboslmuzsbm.supabase.co/storage/v1/object/public/images/${image.name}`} className="group">
       <div className="aspect-w-1 aspect-h-1 w-full overflow-hidden rounded-lg bg-gray-200 xl:aspect-w-7 xl:aspect-h-8">
@@ -76,8 +79,8 @@ function BlurImage({ image }) {
           onLoadingComplete={() => setLoading(false)}
         />
       </div>
-      <div className=' w-2/3 p-2  bg-gray-300 my-2 rounded-xl'>
-        <p className='text-white text-sm'>{image.created_at}</p>
+      <div className=' w-fit p-2  bg-gray-300 my-2 rounded-xl'>
+        <p className='text-white text-sm'>{formatCreationDate(image.created_at)}</p>
       </div>
     </a>
   )
