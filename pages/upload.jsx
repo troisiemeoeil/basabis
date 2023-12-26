@@ -1,21 +1,37 @@
 import { createClient } from '@supabase/supabase-js'
+import toast, { Toaster } from 'react-hot-toast';
 
 
 const supabase = createClient('https://eencnukfilboslmuzsbm.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVlbmNudWtmaWxib3NsbXV6c2JtIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDM0NDI2ODUsImV4cCI6MjAxOTAxODY4NX0.ljRdsDQlsjHiaxRJ5ZPCrRhvxgipnR1PZOJIoYZkcSw')
-
+  // Function to track upload progress
+  const onProgress = (file, event) => {
+    const progress = (event.loaded / event.total) * 100;
+    console.log(`File ${file.name} progress: ${Math.round(progress)}%`);
+  };
 async function uploadImages(e) {
-    console.log(supabase);
+  const toastId = toast.loading('Basabis going to ze clouds 👨‍🚀✨');
+  // toast.loading('Basabis going to ze clouds 👨‍🚀✨');
+
     const fileList = e.target.files;
     const uploadedImages = Array.from(fileList);
     console.log(uploadedImages);
     const promises = uploadedImages.map(async (image) => {
-        const { data, error } = await supabase.storage.from('basabis').upload(`${image.name}`, image);
+        const { data, error } = await supabase.storage
+        .from('basabis')
+        .upload(`${image.name}`, image, {
+          onProgress: (event) => onProgress(image, event),
+        });
         if (error) {
           console.error('Error uploading image:', error);
         }
         return data;
       });
       await Promise.all(promises);
+      toast.dismiss(toastId);
+      toast.success("Basabis landed on ze clouds ☁️")
+      setTimeout(() => {
+        window.location.reload();
+      }, 1000);
 }
 
 export default function Upload() {

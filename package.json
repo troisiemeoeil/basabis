@@ -12,6 +12,7 @@
     "next-cloudinary": "^5.16.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-hot-toast": "^2.4.1",
     "video-react": "^0.16.0"
   },
   "devDependencies": {

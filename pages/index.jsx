@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import Image from 'next/image'
 import { Player } from 'video-react';
 import Upload from './upload'
-
+import toast, { Toaster } from 'react-hot-toast';
 
 
 function cn(...classes) {
@@ -32,23 +32,18 @@ export default function Gallery({ images }) {
   // console.log(project);
 }, []);
 return (
+  
   <div className="mx-auto flex flex-col gap-10 max-w-2xl py-16 px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8">
+    <div><Toaster/></div>
     <Upload />
     <div className="grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
       {project && project.map((image, i) => (
         image.metadata.mimetype === "image/jpeg" ?
         <BlurImage key={image.id} image={image} />
-        // <img key={i} src={`https://eencnukfilboslmuzsbm.supabase.co/storage/v1/object/public/images/${image.name}`} />
         :
-//         <CldVideoPlayer
-//   width="1920"
-//   height="1080"
-//   src={`https://eencnukfilboslmuzsbm.supabase.co/storage/v1/object/public/images/${image.name}`}
-// />
-<Player key={i} >
-<source src={`https://eencnukfilboslmuzsbm.supabase.co/storage/v1/object/public/images/${image.name}`} />
-</Player>
-        // <h2>nada</h2>
+        <Player key={i} >
+        <source src={`https://eencnukfilboslmuzsbm.supabase.co/storage/v1/object/public/basabis/${image.name}`} />
+        </Player>
       ))}
     </div>
   </div>
@@ -62,7 +57,7 @@ function BlurImage({ image }) {
     return date.toLocaleDateString(); // Adjust this format based on your requirements
   };
   return (
-    <a href={`https://eencnukfilboslmuzsbm.supabase.co/storage/v1/object/public/images/${image.name}`} className="group">
+    <a href={`https://eencnukfilboslmuzsbm.supabase.co/storage/v1/object/public/basabis/${image.name}`} className="group">
       <div className="aspect-w-1 aspect-h-1 w-full overflow-hidden rounded-lg bg-gray-200 xl:aspect-w-7 xl:aspect-h-8">
         
         <Image
