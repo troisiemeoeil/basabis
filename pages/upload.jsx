@@ -29,9 +29,9 @@ async function uploadImages(e) {
       await Promise.all(promises);
       toast.dismiss(toastId);
       toast.success("Basabis landed on ze clouds ☁️")
-      setTimeout(() => {
-        window.location.reload();
-      }, 1000);
+      // setTimeout(() => {
+      //   window.location.reload();
+      // }, 1000);
 }
 
 export default function Upload() {
