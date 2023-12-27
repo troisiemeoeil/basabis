@@ -3,7 +3,7 @@ import Image from 'next/image'
 import { Player } from 'video-react';
 import Upload from './upload'
 import toast, { Toaster } from 'react-hot-toast';
-
+import Remove from './remove'
 
 function cn(...classes) {
   return classes.filter(Boolean).join(' ')
@@ -58,7 +58,8 @@ function BlurImage({ image }) {
     return date.toLocaleDateString(); // Adjust this format based on your requirements
   };
   return (
-    <a href={`https://eencnukfilboslmuzsbm.supabase.co/storage/v1/object/public/basabis/${image.name}`} className="group">
+    <div>
+   {/* <a href={`https://eencnukfilboslmuzsbm.supabase.co/storage/v1/object/public/basabis/${image.name}`} className="group"> */}
       <div className="aspect-w-1 aspect-h-1 w-full overflow-hidden rounded-lg bg-gray-200 xl:aspect-w-7 xl:aspect-h-8">
         
         <Image
@@ -76,9 +77,12 @@ function BlurImage({ image }) {
           onLoadingComplete={() => setLoading(false)}
         />
       </div>
-      <div className=' w-fit p-2  bg-gray-300 my-2 rounded-xl'>
+      <div className=' w-full flex justify-around  items-center p-2  bg-gray-300 my-2 rounded-xl'>
         <p className='text-white text-sm'>{formatCreationDate(image.created_at)}</p>
+        <Remove title={image.name}/>
       </div>
-    </a>
+    {/* </a> */}
+    </div>
+ 
   )
 }
