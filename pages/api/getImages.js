@@ -14,7 +14,10 @@ export default async function handler(req, res) {
     // Fetch images from the storage bucket
     const { data, error } = await supabase.storage
     .from('basabis')
-    .list()
+    .list('', {
+      limit: 9000,
+      offset: 0,
+    })
   
     if (error) {
       throw error;

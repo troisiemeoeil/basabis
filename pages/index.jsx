@@ -10,7 +10,7 @@ function cn(...classes) {
 }
 
 
-export default function Gallery({ images }) {
+export default function Gallery() {
  const [project, setProject] = useState(null)
 
  useEffect(() => {
@@ -66,6 +66,7 @@ function BlurImage({ image }) {
           src={`https://eencnukfilboslmuzsbm.supabase.co/storage/v1/object/public/basabis/${image.name}`}
           layout="fill"
           objectFit="cover"
+          property='true'
           className={cn(
             'duration-700 ease-in-out group-hover:opacity-75',
             isLoading
