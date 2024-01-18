@@ -31,6 +31,10 @@ export default function Gallery() {
   fetchImages();
   // console.log(project);
 }, []);
+const formatCreationDate = (dateString) => {
+  const date = new Date(dateString);
+  return date.toLocaleDateString(); // Adjust this format based on your requirements
+};
 return (
   
   <div className="mx-auto flex flex-col gap-10 max-w-2xl py-16 px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8">
@@ -40,9 +44,21 @@ return (
     <div className="grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
       {project && project.map((image, i) => (
         image.metadata.mimetype === "video/mp4" ||   image.metadata.mimetype === "video/quicktime" ?
-        <Player key={i} >
+      
+            <div>
+            {/* <a href={`https://eencnukfilboslmuzsbm.supabase.co/storage/v1/object/public/basabis/${image.name}`} className="group"> */}
+               <div className="  w-full h-auto overflow-hidden rounded-lg bg-gray-200 xl:h-auto ">
+                 
+               <Player key={i} >
         <source src={`https://eencnukfilboslmuzsbm.supabase.co/storage/v1/object/public/basabis/${image.name}`} />
         </Player>
+               </div>
+               <div className=' w-full flex justify-around  items-center p-2  bg-gray-300 my-2 rounded-xl'>
+                 <p className='text-white text-sm'>{formatCreationDate(image.created_at)}</p>
+                 <Remove title={image.name}/>
+               </div>
+             {/* </a> */}
+             </div>
         :
         <BlurImage key={image.id} image={image} />
       ))}
