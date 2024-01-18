@@ -18,6 +18,7 @@ export default async function handler(req, res) {
       limit: 9000,
       offset: 0,
     })
+    // .range(0,10)
   
     if (error) {
       throw error;
