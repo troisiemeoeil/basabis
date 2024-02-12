@@ -26,7 +26,6 @@ export default async function handler(req, res) {
     const sortedFilesByDate = data.sort((a, b) => {
       const dateA = new Date(a.created_at);
       const dateB = new Date(b.created_at);
-
       return dateB - dateA; // Sort in descending order (newest first)
     });
     // Process the data or send it directly
